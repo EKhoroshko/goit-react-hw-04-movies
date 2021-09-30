@@ -11,6 +11,7 @@ function Searchbar() {
   const handleSearchMovies = e => {
     e.preventDefault();
     getSearchdMovies(value).then(res => setMovies(res.data.results));
+    setValue('');
   };
 
   const handleChange = e => {
