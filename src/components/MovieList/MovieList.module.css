@@ -1,0 +1,19 @@
+.list {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+.selected {
+  color: #000 !important;
+  text-decoration: none;
+}
+
+.item {
+  margin-top: 5px;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+}
