@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { getMoviesByIdReviews } from '../../servise/apiService';
+import { useParams } from 'react-router-dom';
 import css from '../Reviews/Reviews.module.css';
 
-const Reviews = ({ id }) => {
+const Reviews = () => {
   const [reviews, setReviews] = useState({});
+  const param = useParams();
+  const id = param.movieId;
 
   useEffect(() => {
     getMoviesByIdReviews(id).then(({ data }) => setReviews(data.results));

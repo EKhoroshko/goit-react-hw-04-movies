@@ -1,21 +1,20 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { Context } from '../../Context/Context';
 import PropTypes from 'prop-types';
-import { getSearchdMovies } from '../../servise/apiService';
-import MovieList from '../MovieList/MovieList';
 import css from '../Searchbar/Searchbar.module.css';
 
 function Searchbar() {
-  const [value, setValue] = useState('');
-  const [movies, setMovies] = useState([]);
+  const [values, setValues] = useState('');
+  const { setValue } = useContext(Context);
 
   const handleSearchMovies = e => {
     e.preventDefault();
-    getSearchdMovies(value).then(res => setMovies(res.data.results));
-    setValue('');
+    setValue(values);
+    setValues('');
   };
 
   const handleChange = e => {
-    setValue(e.currentTarget.value.toLowerCase());
+    setValues(e.currentTarget.value.toLowerCase());
   };
 
   return (
@@ -30,15 +29,12 @@ function Searchbar() {
             className={css.SearchFormInput}
             type="text"
             autoComplete="off"
-            placeholder="Search images and photos"
-            value={value}
+            placeholder="Search movies"
+            value={values}
             onChange={handleChange}
           />
         </form>
       </header>
-      <div className={css.box}>
-        <MovieList movies={movies} page="/movies" />
-      </div>
     </section>
   );
 }

@@ -1,9 +1,12 @@
 import { getMoviesByIdCost } from '../../servise/apiService';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import css from '../Cast/Cast.module.css';
 
-const Cost = ({ id }) => {
+const Cost = () => {
   const [cost, setCost] = useState([]);
+  const param = useParams();
+  const id = param.movieId;
 
   useEffect(() => {
     getMoviesByIdCost(id).then(({ data }) => setCost(data.cast));

@@ -28,7 +28,7 @@ const MovieDetailsPage = () => {
   }, [match.params.movieId]);
 
   const goBack = () => {
-    history.push(location.state?.from || '/');
+    history.push(location?.state?.from ?? '/');
   };
 
   return (
@@ -68,20 +68,13 @@ const MovieDetailsPage = () => {
         <Suspense
           fallback={
             <div>
-              {' '}
               <Loader />
             </div>
           }
         >
           <Switch>
-            <Route
-              path={`${match.url}/cost`}
-              render={props => <Cost {...props} id={match.params.movieId} />}
-            />
-            <Route
-              path={`${match.url}/reviews`}
-              render={props => <Reviews {...props} id={match.params.movieId} />}
-            />
+            <Route path={`${match.path}/cost`} component={Cost} />
+            <Route path={`${match.path}/reviews`} component={Reviews} />
           </Switch>
         </Suspense>
       </div>
