@@ -16,6 +16,8 @@ const Reviews = lazy(() => import('../../components/Reviews/Reviews'));
 
 const MovieDetailsPage = () => {
   const [movieInfo, setMovieInfo] = useState({});
+  const [searc, setSearc] = useState('');
+  const [from, setFrom] = useState('');
   const match = useRouteMatch();
   const location = useLocation();
   const history = useHistory();
@@ -25,10 +27,22 @@ const MovieDetailsPage = () => {
       const getDate = data.release_date.slice(0, 4);
       setMovieInfo({ ...data, getDate });
     });
-  }, [match.params.movieId]);
+    if (location.state) {
+      setSearc(location.state.search);
+      setFrom(location.state.from);
+    }
+  }, [location.search, location.state, match.params.movieId]);
 
   const goBack = () => {
-    history.push(location?.state?.from ?? '/');
+    history.push(
+      {
+        pathname: from,
+        search: searc,
+        state: {
+          searc,
+        },
+      } ?? `/movie`,
+    );
   };
 
   return (

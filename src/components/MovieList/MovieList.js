@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import css from '../MovieList/MovieList.module.css';
 
-const MovieList = ({ movies }) => {
+const MovieList = ({ movies, query = '' }) => {
   const location = useLocation();
   return (
     <ul className={css.list}>
@@ -9,7 +9,10 @@ const MovieList = ({ movies }) => {
         <li className={css.item} key={item.id}>
           <NavLink
             className={css.selected}
-            to={{ pathname: `/movies/${item.id}`, state: { from: location } }}
+            to={{
+              pathname: `/movies/${item.id}`,
+              state: { from: `${location.pathname}`, search: query },
+            }}
           >
             <h3 className={css.title}>{item.title}</h3>
           </NavLink>

@@ -1,15 +1,19 @@
-import { useContext, useState } from 'react';
-import { Context } from '../../Context/Context';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import css from '../Searchbar/Searchbar.module.css';
 
-function Searchbar() {
+function Searchbar({ onSubmit }) {
+  const history = useHistory();
   const [values, setValues] = useState('');
-  const { setValue } = useContext(Context);
 
   const handleSearchMovies = e => {
     e.preventDefault();
-    setValue(values);
+    onSubmit(values);
+    history.push({
+      pathname: `/movies`,
+      search: `query=${values}`,
+    });
     setValues('');
   };
 
